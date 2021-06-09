@@ -3,7 +3,7 @@ Notebook for Machine Learning Program
 
 # Overview
 
-This folder contains python file to run crop prediction model. Additional file including 4 Tensorflow model and architecture (.h5 format) and 2 .csv file ass input.
+This folder contains python file to run crop prediction model. Additional file including 4 Tensorflow model and architecture (.h5 format) and 2 .csv file as input.
 
 ## Installation
 
