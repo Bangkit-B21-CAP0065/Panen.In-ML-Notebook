@@ -3,7 +3,7 @@ Notebook and python code for Machine Learning Crop Prediction Program
 
 # Overview
 
-Crop folder contains python file to run crop prediction model. Additional file including 4 Tensorflow model and architecture (.h5 format) and 2 .csv file as input.
+Crop folder contains python file to run crop prediction model. Additional file including 4 Tensorflow models and architectures (.h5 format) and 2 .csv files as input.
 
 ## Installation
 
