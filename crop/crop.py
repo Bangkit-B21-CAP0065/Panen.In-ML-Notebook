@@ -1,8 +1,10 @@
+import os
+import sys
+
 import tensorflow as tf
 from tensorflow import keras
 import pandas as pd
 import numpy as np
-import os
 dirname = os.path.dirname(__file__)
 
 # variabel input user : subround,location,crop
@@ -27,7 +29,7 @@ def forecast(subround,location,model_bandung=model_bandung,model_bogor=model_bog
     df_bandung_copy = df_bandung.copy()
     df_bogor_copy = df_bogor.copy()
 
-    if location == 'Kab.Bandung'  :
+    if location == 'bandung'  :
         for i in range(subround):
             input = df_bandung_copy[-width:]
             input_forecast = np.array(input)[np.newaxis]
@@ -35,7 +37,7 @@ def forecast(subround,location,model_bandung=model_bandung,model_bogor=model_bog
             temp = np.squeeze(temp, axis=None)
             output.append(temp)
             df_bandung_copy = df_bandung_copy.append(pd.DataFrame([temp], columns=features))
-    if location == 'Kab.Bogor'  :
+    if location == 'bogor'  :
         for i in range(subround):
             input = df_bogor_copy[-width:]
             input_forecast = np.array(input)[np.newaxis]
@@ -45,31 +47,19 @@ def forecast(subround,location,model_bandung=model_bandung,model_bogor=model_bog
             df_bogor_copy = df_bandung_copy.append(pd.DataFrame([temp], columns=features))
     return output
 
-def spaceremoval(input):
-        #space problem
-        result=""
-        count=1
-        for item in input.split():
-            if count==1 or count==len(input.split()):
-                result+=item
-            else:
-                result+=" "+item
-            count+=1
-        return result
-
 # Main Function
-def main():
-    subround = 5
-    location = 'Kab.Bandung'
-    crop = 'Corn'
+def main(*, subround, location, crop):
+    # subround = 5
+    # location = 'bandung' or 'bogor'
+    # crop = 'jagung' or 'beras'
 
     try:
       climate = np.array(forecast(subround,location))
       # print(climate)
       # print('')
-      if crop == 'Rice' :
+      if crop == 'beras' :
           output  = np.array(model_rice.predict(climate))
-      elif crop  == 'Corn':
+      elif crop  == 'jagung':
           output  = np.array(model_corn.predict(climate))
       else  :
           return "Invalid Input"
@@ -78,7 +68,10 @@ def main():
         return "Please Enter valid values"
 
     output = np.squeeze(output, axis=None)
-    output = spaceremoval(str(output))
     print(output)
 
-main()
+if __name__ == "__main__":
+    try:
+        main(subround=int(sys.argv[1]), location=sys.argv[2], crop=sys.argv[3])
+    except Exception as e:
+        print("Error: ", e)
