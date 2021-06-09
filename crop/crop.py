@@ -63,7 +63,7 @@ def main():
     except ValueError:
         return "Please Enter valid values"
     
-    ouput = np.squeeze(output, axis=None)
+    output = np.squeeze(output, axis=None)
     print(output)
 
 
