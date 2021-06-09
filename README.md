@@ -23,7 +23,7 @@ Pandas 1.2.4
 
 Numpy 1.19.5
 
-Tenorflow 2.5.0
+Tensorflow 2.5.0
 
 ## Run
 
