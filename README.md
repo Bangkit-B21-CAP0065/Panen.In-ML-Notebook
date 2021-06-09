@@ -18,8 +18,11 @@ pip install -r requirements.txt
 ## Library version used
 
 Python 3.8.7
+
 Pandas 1.2.4
+
 Numpy 1.19.5
+
 Tenorflow 2.5.0
 
 ## Run
