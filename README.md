@@ -1,9 +1,9 @@
 # Panen.In-ML-Notebook
-Notebook for Machine Learning Program
+Notebook and python code for Machine Learning Crop Prediction Program
 
 # Overview
 
-This folder contains python file to run crop prediction model. Additional file including 4 Tensorflow model and architecture (.h5 format) and 2 .csv file as input.
+Crop folder contains python file to run crop prediction model. Additional file including 4 Tensorflow model and architecture (.h5 format) and 2 .csv file as input.
 
 ## Installation
 
@@ -31,3 +31,7 @@ run from your terminal
 ```python
 python3 crop.py
 ```
+
+## Other Files
+
+.ipynb files can be opened and run using Jupyter or Google Colab (https://colab.research.google.com/)
