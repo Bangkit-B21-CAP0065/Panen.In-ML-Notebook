@@ -2,19 +2,21 @@ import tensorflow as tf
 from tensorflow import keras
 import pandas as pd
 import numpy as np
+import os
+dirname = os.path.dirname(__file__)
 
 # variabel input user : subround,location,crop
 # model : model_bandung,model_bogor,model_rice,model_corn
 
 # Dataframe for forecast and crop prediction
-df_bandung  = pd.read_csv(r'C:/Users/Isama/Downloads/crop_prediction/df_bandung.csv')
-df_bogor = pd.read_csv(r'C:/Users/Isama/Downloads/crop_prediction/df_bogor.csv')
+df_bandung  = pd.read_csv(os.path.join(dirname, 'df_bandung.csv'))
+df_bogor = pd.read_csv(os.path.join(dirname, 'df_bogor.csv'))
 
 # Model for prediction
-model_bandung = tf.keras.models.load_model('C:/Users/Isama/Downloads/crop_prediction/model_bandung.h5')
-model_bogor = tf.keras.models.load_model('C:/Users/Isama/Downloads/crop_prediction/model_bogor.h5')
-model_rice  = tf.keras.models.load_model('C:/Users/Isama/Downloads/crop_prediction/model_rice.h5')
-model_corn  = tf.keras.models.load_model('C:/Users/Isama/Downloads/crop_prediction/model_corn.h5')
+model_bandung = tf.keras.models.load_model(os.path.join(dirname, 'model_bandung.h5'))
+model_bogor = tf.keras.models.load_model(os.path.join(dirname, 'model_bogor.h5'))
+model_rice  = tf.keras.models.load_model(os.path.join(dirname, 'model_rice.h5'))
+model_corn  = tf.keras.models.load_model(os.path.join(dirname, 'model_corn.h5'))
 
 # Climate Forecast Function
 def forecast(subround,location,model_bandung=model_bandung,model_bogor=model_bogor) :
@@ -43,32 +45,40 @@ def forecast(subround,location,model_bandung=model_bandung,model_bogor=model_bog
             df_bogor_copy = df_bandung_copy.append(pd.DataFrame([temp], columns=features))
     return output
 
+def spaceremoval(input):
+        #space problem
+        result=""
+        count=1
+        for item in input.split():
+            if count==1 or count==len(input.split()):
+                result+=item
+            else:
+                result+=" "+item
+            count+=1
+        return result
+
 # Main Function
 def main():
-    subround = 2
+    subround = 5
     location = 'Kab.Bandung'
     crop = 'Corn'
 
     try:
       climate = np.array(forecast(subround,location))
-      print(climate)
-      print('')
+      # print(climate)
+      # print('')
       if crop == 'Rice' :
-          output  = np.array(model_rice.predict(climate)) 
+          output  = np.array(model_rice.predict(climate))
       elif crop  == 'Corn':
-          output  = np.array(model_corn.predict(climate)) 
+          output  = np.array(model_corn.predict(climate))
       else  :
           return "Invalid Input"
-    
+
     except ValueError:
         return "Please Enter valid values"
-    
+
     output = np.squeeze(output, axis=None)
+    output = spaceremoval(str(output))
     print(output)
 
-
 main()
-
-
-
-
