@@ -27,9 +27,13 @@ Tensorflow 2.5.0
 
 ## Run
 
-run from your terminal
+Run from your terminal with command line arguments:
 ```python
-python3 crop.py
+python3 crop.py <subrounds> <city> <type of crop>
+```
+Example:
+```python
+python3 crop.py 2 bogor jagung
 ```
 
 ## Other Files
