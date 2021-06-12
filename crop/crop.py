@@ -1,6 +1,5 @@
 import os
 import sys
-import re
 
 import tensorflow as tf
 from tensorflow import keras
