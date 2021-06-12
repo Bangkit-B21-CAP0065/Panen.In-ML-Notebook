@@ -1,5 +1,6 @@
 import os
 import sys
+import re
 
 import tensorflow as tf
 from tensorflow import keras
@@ -67,8 +68,11 @@ def main(*, subround, location, crop):
     except ValueError:
         return "Please Enter valid values"
 
-    output = np.squeeze(output, axis=None)
-    print(output)
+    result=[]
+    for item in output:
+        result.append(item[0])
+    print(result)
+
 
 if __name__ == "__main__":
     try:
